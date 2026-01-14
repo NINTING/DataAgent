@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
+~$*.xlsm
+
+# Config files with sensitive data
+config.config
