@@ -1,0 +1,20 @@
+"""修复 test_generator.py 中的拼写错误"""
+
+import re
+
+# 读取文件
+with open(
+    "D:/code/DataAgent/Script/generate_code/test_generator.py", "r", encoding="utf-8"
+) as f:
+    content = f.read()
+
+# 替换所有 AICodeExecutor (区分大小写）
+content = re.sub(r"AICodeExecutor", "AICodeExecutor", content)
+
+# 写回文件
+with open(
+    "D:/code/DataAgent/Script/generate_code/test_generator.py", "w", encoding="utf-8"
+) as f:
+    f.write(content)
+
+print("拼写修复完成！")

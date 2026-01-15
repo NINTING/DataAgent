@@ -16,3 +16,5 @@ wheels/
 
 # Config files with sensitive data
 config.config
+.env
+

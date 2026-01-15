@@ -3,11 +3,7 @@
 演示AICodeExecutor的各种使用场景。
 """
 
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
-from codebox import AICodeExecutor
+from Script.codebox import AICodeExecutor
 
 
 def test_simple_execution():
@@ -15,15 +11,15 @@ def test_simple_execution():
     print("=" * 60)
     print("测试1: 简单的Python代码执行")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 result = 2 + 3
 print("计算完成")
 result * 10
     """)
-    
+
     print_result(result)
 
 
@@ -32,18 +28,18 @@ def test_with_variables():
     print("\n" + "=" * 60)
     print("测试2: 使用变量注入")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute(
         code="""
 result = data['a'] + data['b']
 print(f"计算结果: {result}")
 result
         """,
-        variables={"data": {"a": 10, "b": 20}}
+        variables={"data": {"a": 10, "b": 20}},
     )
-    
+
     print_result(result)
 
 
@@ -52,9 +48,9 @@ def test_excel_reading():
     print("\n" + "=" * 60)
     print("测试3: 读取Excel文件")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 import pandas as pd
 
@@ -64,7 +60,7 @@ print(f"列名: {list(df.columns)}")
 
 df.head(3)
     """)
-    
+
     print_result(result)
 
 
@@ -73,13 +69,13 @@ def test_error_handling():
     print("\n" + "=" * 60)
     print("测试4: 错误处理")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 x = 1 / 0
     """)
-    
+
     print_result(result)
 
 
@@ -88,14 +84,14 @@ def test_syntax_error():
     print("\n" + "=" * 60)
     print("测试5: 语法错误")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 if True
     print("缺少冒号")
     """)
-    
+
     print_result(result)
 
 
@@ -104,14 +100,14 @@ def test_forbidden_import():
     print("\n" + "=" * 60)
     print("测试6: 禁止的模块导入")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 import os
 print("这个不应该执行")
     """)
-    
+
     print_result(result)
 
 
@@ -120,9 +116,9 @@ def test_multiple_statements():
     print("\n" + "=" * 60)
     print("测试7: 多语句执行")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 numbers = [1, 2, 3, 4, 5]
 print(f"原始列表: {numbers}")
@@ -135,7 +131,7 @@ print(f"总和: {total}")
 
 total
     """)
-    
+
     print_result(result)
 
 
@@ -144,9 +140,9 @@ def test_math_operations():
     print("\n" + "=" * 60)
     print("测试8: 数学运算")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 import math
 
@@ -161,7 +157,7 @@ print(f"√16 = {z}")
 
 [x, y, z]
     """)
-    
+
     print_result(result)
 
 
@@ -170,9 +166,9 @@ def test_string_operations():
     print("\n" + "=" * 60)
     print("测试9: 字符串操作")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     result = executor.execute("""
 import re
 
@@ -190,7 +186,7 @@ print(f"替换后: {result}")
 
 result
     """)
-    
+
     print_result(result)
 
 
@@ -214,7 +210,7 @@ def main():
     print("\n" + "=" * 60)
     print("AI代码执行器测试套件")
     print("=" * 60)
-    
+
     tests = [
         test_simple_execution,
         test_with_variables,
@@ -226,13 +222,13 @@ def main():
         test_math_operations,
         test_string_operations,
     ]
-    
+
     for test in tests:
         try:
             test()
         except Exception as e:
             print(f"\n[ERROR] 测试 '{test.__name__}' 发生异常: {e}")
-    
+
     print("\n" + "=" * 60)
     print("测试完成")
     print("=" * 60)

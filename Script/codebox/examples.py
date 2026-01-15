@@ -3,11 +3,7 @@
 演示AICodeExecutor在实际项目中的应用场景。
 """
 
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
-from codebox import AICodeExecutor
+from Script.codebox import AICodeExecutor
 
 
 def example_1_basic_usage():
@@ -15,9 +11,9 @@ def example_1_basic_usage():
     print("=" * 60)
     print("示例1: 基本用法")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     code = """
 numbers = [1, 2, 3, 4, 5]
 squared = [x**2 for x in numbers]
@@ -29,9 +25,9 @@ print(f"平方和: {sum_squared}")
 
 sum_squared
     """
-    
+
     result = executor.execute(code)
-    
+
     if result["success"]:
         print(f"\n计算结果: {result['output']}")
     else:
@@ -43,9 +39,9 @@ def example_2_excel_analysis():
     print("\n" + "=" * 60)
     print("示例2: Excel数据分析")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     code = """
 import pandas as pd
 
@@ -65,9 +61,9 @@ print(f"数据列数: {len(df.columns)}")
 
 head_3
     """
-    
+
     result = executor.execute(code)
-    
+
     if result["success"]:
         print(f"\n数据预览:\n{result['output']}")
     else:
@@ -79,16 +75,12 @@ def example_3_with_variables():
     print("\n" + "=" * 60)
     print("示例3: 使用变量注入")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     # 定义要注入的变量
-    variables = {
-        "data": [10, 20, 30, 40, 50],
-        "threshold": 25,
-        "column_name": "values"
-    }
-    
+    variables = {"data": [10, 20, 30, 40, 50], "threshold": 25, "column_name": "values"}
+
     code = """
 import statistics
 
@@ -114,9 +106,9 @@ print(f"大于 {threshold} 的值: {filtered}")
     "count_above_threshold": len(filtered)
 }
     """
-    
+
     result = executor.execute(code, variables=variables)
-    
+
     if result["success"]:
         print(f"\n分析结果: {result['output']}")
     else:
@@ -181,7 +173,7 @@ def example_5_data_transformation():
 
     executor = AICodeExecutor()
 
-    code = '''
+    code = """
 import pandas as pd
 
 # 创建示例DataFrame
@@ -208,7 +200,7 @@ print("\\n年龄组分布:")
 print(age_group_counts)
 
 df
-    '''
+    """
 
     result = executor.execute(code)
 
@@ -223,21 +215,21 @@ def example_6_error_handling():
     print("\n" + "=" * 60)
     print("示例6: 错误处理")
     print("=" * 60)
-    
+
     executor = AICodeExecutor()
-    
+
     # 测试1: 除零错误
     print("\n测试1: 除零错误")
     result = executor.execute("x = 1 / 0")
     print(f"结果: {result['success']}")
     print(f"错误: {result['error']}")
-    
+
     # 测试2: 语法错误
     print("\n测试2: 语法错误")
     result = executor.execute("if True print('No colon')")
     print(f"结果: {result['success']}")
     print(f"错误: {result['error']}")
-    
+
     # 测试3: 禁止的导入
     print("\n测试3: 禁止的导入")
     result = executor.execute("import os; print('This will fail')")
@@ -250,7 +242,7 @@ def main():
     print("\n" + "=" * 60)
     print("Codebox 使用示例")
     print("=" * 60)
-    
+
     examples = [
         example_1_basic_usage,
         example_2_excel_analysis,
@@ -259,13 +251,13 @@ def main():
         example_5_data_transformation,
         example_6_error_handling,
     ]
-    
+
     for example in examples:
         try:
             example()
         except Exception as e:
             print(f"\n[ERROR] 示例 '{example.__name__}' 发生异常: {e}")
-    
+
     print("\n" + "=" * 60)
     print("示例演示完成")
     print("=" * 60)

@@ -1,0 +1,10 @@
+Python is a high-level programming language created by Guido van Rossum in 1991.
+It is known for its simplicity and readability.
+The Python Software Foundation was formed in 2001.
+Python 2.0 was released in 2000 and Python 3.0 was released in 2008.
+Python has over 5000 packages available on PyPI.
+In 2023, Python was ranked as the most popular programming language.
+The Zen of Python contains 19 guiding principles.
+A typical Python project has about 1000 to 5000 lines of code.
+Python can be used for web development, data science, and automation.
+The latest stable version is Python 3.12.0.
